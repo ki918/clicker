@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour {
 		for (int i = 1; i < panelList.Count; i++) {
 			GameObject obj = (GameObject)panelList [i];
 
-			obj.gameObject.SetActive (false);
+			obj.SetActive (false);
 		}
 	}
 
@@ -48,9 +48,9 @@ public class UIManager : MonoBehaviour {
 			GameObject obj = (GameObject)panelList [i];
 
 			if (obj.tag.Equals (tag)) {
-				obj.gameObject.SetActive (true);
+				obj.SetActive (true);
 			} else {
-				obj.gameObject.SetActive (false);
+				obj.SetActive (false);
 			}
 		}
 	}

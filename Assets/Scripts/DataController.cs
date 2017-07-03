@@ -28,6 +28,10 @@ public class DataController : MonoBehaviour {
 		Screen.SetResolution (Screen.width, Screen.width * 3 / 2, true);
 	}
 
+	void Start() {
+		StartCoroutine ("addGoldPerSecLoop");
+	}
+
 	public void setGold(int newGold) {
 		m_Gold = newGold;
 		PlayerPrefs.SetInt ("Gold", m_Gold);
@@ -95,7 +99,7 @@ public class DataController : MonoBehaviour {
 		string key = itemButton.itemName;
 
 		PlayerPrefs.SetInt (key + "_level", itemButton.level);
-		PlayerPrefs.SetInt (key + "_GoldBySec", itemButton.startGoldPerSec);
+		PlayerPrefs.SetInt (key + "_GoldBySec", itemButton.goldPerSec);
 		PlayerPrefs.SetInt (key + "_cost", itemButton.currentCost);
 
 		if (itemButton.isPurchase) {
@@ -109,7 +113,9 @@ public class DataController : MonoBehaviour {
 		int result = 0;
 
 		for (int i = 0; i < itemButtons.Length; i++) {
-			result += itemButtons [i].goldPerSec;
+			if (itemButtons [i].isPurchase) {
+				result += itemButtons [i].goldPerSec;
+			}
 		}
 
 		return result;
@@ -118,5 +124,13 @@ public class DataController : MonoBehaviour {
 	public void TouchScreen(Vector3 pos) {
 		int gold = getGoldPerClick ();
 		addGold (gold);
+	}
+		
+	IEnumerator addGoldPerSecLoop() {
+		while(true) {
+			addGold (getGoldPerSec ());
+
+			yield return new WaitForSeconds (1.0f);
+		}
 	}
 }
