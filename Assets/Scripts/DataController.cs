@@ -25,7 +25,7 @@ public class DataController : MonoBehaviour {
 		m_Gold = PlayerPrefs.GetInt ("Gold");
 		m_GoldPerClick = PlayerPrefs.GetInt ("GoldPerClick", 1);
 		itemButtons = FindObjectsOfType<ItemButton> ();
-		Screen.SetResolution (Screen.width, Screen.width * 3 / 2, true);
+		Screen.SetResolution (Screen.width, Screen.width * 16 / 10, true);
 	}
 
 	void Start() {
