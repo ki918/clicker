@@ -124,6 +124,8 @@ public class DataController : MonoBehaviour {
 	public void TouchScreen(Vector3 pos) {
 		int gold = getGoldPerClick ();
 		addGold (gold);
+
+		HeroManager.getInstance ().moveHero ();
 	}
 		
 	IEnumerator addGoldPerSecLoop() {
