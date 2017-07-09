@@ -126,6 +126,7 @@ public class DataController : MonoBehaviour {
 		addGold (gold);
 
 		HeroManager.getInstance ().moveHero ();
+		AudioManager.getInstance ().playSFX (0);
 	}
 		
 	IEnumerator addGoldPerSecLoop() {

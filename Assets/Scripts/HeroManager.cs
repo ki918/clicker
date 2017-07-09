@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class HeroManager : MonoBehaviour {
-	public static HeroManager instance;
+	private static HeroManager instance;
 	public Image heroImg;
 	private int spriteNum = 2;
 	private int heroSpeed = 10;

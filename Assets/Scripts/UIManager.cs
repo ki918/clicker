@@ -3,11 +3,12 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
-	public static UIManager uiManager;
+	private static UIManager uiManager;
 
 	public Text goldDisplayer;
 	public Text goldPerDisplayer;
 	public Text goldPerSecDisplayer;
+	public GameObject settingPanel;
 
 	private ArrayList panelList;
 
@@ -53,5 +54,9 @@ public class UIManager : MonoBehaviour {
 				obj.SetActive (false);
 			}
 		}
+	}
+
+	public void ShowSettingPanel() {
+		settingPanel.SetActive (true);
 	}
 }
