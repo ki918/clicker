@@ -23,6 +23,10 @@ public class AudioManager : MonoBehaviour {
 		return instance;
 	}
 
+	void Start() {
+		playBGM (1);
+	}
+
 	public void playBGM(int stage) {
 		bgmSource.clip = stageBGM [stage - 1];
 		bgmSource.Play ();
