@@ -125,7 +125,6 @@ public class DataController : MonoBehaviour {
 		int gold = getGoldPerClick ();
 		addGold (gold);
 
-		HeroManager.getInstance ().moveHero ();
 		AudioManager.getInstance ().playSFX (0);
 	}
 		

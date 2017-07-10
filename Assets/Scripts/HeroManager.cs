@@ -6,9 +6,10 @@ using UnityEngine.UI;
 public class HeroManager : MonoBehaviour {
 	private static HeroManager instance;
 	public Image heroImg;
+	public Material background;
+
 	private int spriteNum = 2;
-	private int heroSpeed = 10;
-	private int upDownSpeed = 0;
+	private float heroAnimationSpeed = 0.03f;
 	private bool isRight = true;
 
 	public static HeroManager getInstance() {
@@ -25,36 +26,41 @@ public class HeroManager : MonoBehaviour {
 		return instance;
 	}
 
-	public void moveHero() {
-		Vector3 vec = heroImg.transform.localScale;
+	void Start() {
+		StartCoroutine ("moveHero");
+	}
 
-		if (isRight) {
-			vec.x = Mathf.Abs (vec.x);
-			heroImg.transform.localScale = vec;
-		} else {
-			vec.x = -Mathf.Abs (vec.x);
-			heroImg.transform.localScale = vec;
-		}
+	void Update() {
+		Vector2 vec = background.mainTextureOffset;
+		vec.Set (vec.x + (1 * Time.deltaTime), 0);
+		background.mainTextureOffset = vec;
+	}
 
-		heroImg.sprite = Resources.Load<Sprite> ("Hero/hero_0" + spriteNum) as Sprite;
+	IEnumerator moveHero() {
+		while (true) {
+			Vector3 vec = heroImg.transform.localScale;
 
-		if (upDownSpeed != 0) {
-			heroImg.transform.Translate (heroSpeed, upDownSpeed, 0);
-			upDownSpeed = 0;
-		} else {
-			heroImg.transform.Translate (heroSpeed, upDownSpeed, 0);
-		}
-			
-		spriteNum++;
+			if (isRight) {
+				vec.x = Mathf.Abs (vec.x);
+				heroImg.transform.localScale = vec;
+			} else {
+				vec.x = -Mathf.Abs (vec.x);
+				heroImg.transform.localScale = vec;
+			}
 
-		if (spriteNum > 6) {
-			spriteNum = 1;
+			heroImg.sprite = Resources.Load<Sprite> ("Hero/hero_0" + spriteNum) as Sprite;
+				
+			spriteNum++;
+
+			if (spriteNum > 6) {
+				spriteNum = 1;
+			}
+
+			yield return new WaitForSeconds (heroAnimationSpeed);
 		}
 	}
 
 	void OnTriggerEnter2D(Collider2D collider) {
 		isRight = !isRight;
-		upDownSpeed = -50;
-		heroSpeed *= -1;
 	}
 }
