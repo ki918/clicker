@@ -6,6 +6,8 @@ public class DataController : MonoBehaviour {
 	private int m_Gold = 0;
 	private int m_GoldPerClick = 0;
 	private ItemButton[] itemButtons;
+	public GameObject itemObject;
+	public GameObject itemZone;
 
 	public static DataController getInstance() {
 		if (dataController == null) {
@@ -123,11 +125,21 @@ public class DataController : MonoBehaviour {
 
 	public void TouchScreen(Vector3 pos) {
 		int gold = getGoldPerClick ();
+		int rand = Random.Range (1, 101);
 		addGold (gold);
 
 		AudioManager.getInstance ().playSFX (0);
+		dropItem ();
 	}
-		
+
+	private void dropItem() {
+		GameObject obj = (GameObject)Instantiate (itemObject, new Vector3 (1.0f, 1.0f, 0.0f), Quaternion.identity);
+		obj.transform.parent = itemZone.transform;
+		obj.transform.localScale = Vector3.one;
+		float rand = Random.Range (-100.0f, 100.0f);
+		obj.transform.localPosition = new Vector3 (1.0f, rand, 0.0f);
+	}
+
 	IEnumerator addGoldPerSecLoop() {
 		while(true) {
 			addGold (getGoldPerSec ());
