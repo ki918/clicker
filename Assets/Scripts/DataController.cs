@@ -138,6 +138,8 @@ public class DataController : MonoBehaviour {
 		obj.transform.localScale = Vector3.one;
 		float rand = Random.Range (-100.0f, 100.0f);
 		obj.transform.localPosition = new Vector3 (1.0f, rand, 0.0f);
+
+		UIManager.getInstance ().setItem (obj);
 	}
 
 	IEnumerator addGoldPerSecLoop() {

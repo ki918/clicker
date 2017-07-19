@@ -9,8 +9,11 @@ public class UIManager : MonoBehaviour {
 	public Text goldPerDisplayer;
 	public Text goldPerSecDisplayer;
 	public GameObject settingPanel;
+	public Material background;
+	public int moveSpeed;
 
 	private ArrayList panelList;
+	private GameObject moveItemObject;
 
 	public static UIManager getInstance() {
 		if (uiManager == null) {
@@ -42,6 +45,22 @@ public class UIManager : MonoBehaviour {
 		goldDisplayer.text = "GOLD: " + DataController.getInstance ().getGold ();
 		goldPerDisplayer.text = "GOLD PER CLICK: " + DataController.getInstance ().getGoldPerClick ();
 		goldPerSecDisplayer.text = "GOLD PER SEC: " + DataController.getInstance ().getGoldPerSec ();
+
+		Vector2 vec = background.mainTextureOffset;
+		vec.Set (vec.x + (moveSpeed * Time.deltaTime), 0);
+		background.mainTextureOffset = vec;
+
+		if (moveItemObject != null) {
+			//< 아이템 이동
+			moveItemObject.transform.Translate (Vector3.left * (moveSpeed * 280) * Time.deltaTime);
+
+			//< 아이템 화면 밖으로 나가는 경우
+			Vector3 itemVec = Camera.main.WorldToViewportPoint(moveItemObject.transform.position);
+
+			if (itemVec.x < 0) {
+				Destroy (moveItemObject);
+			}
+		}
 	}
 
 	public void changeBottomView(string tag) {
@@ -62,5 +81,9 @@ public class UIManager : MonoBehaviour {
 
 	public void HideSettingPanel() {
 		settingPanel.SetActive (false);
+	}
+
+	public void setItem(GameObject item) {
+		moveItemObject = item;
 	}
 }

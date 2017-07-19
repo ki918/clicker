@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class HeroManager : MonoBehaviour {
 	private static HeroManager instance;
 	public Image heroImg;
-	public Material background;
 
 	private int spriteNum = 2;
 	private float heroAnimationSpeed = 0.03f;
@@ -28,12 +27,6 @@ public class HeroManager : MonoBehaviour {
 
 	void Start() {
 		StartCoroutine ("moveHero");
-	}
-
-	void Update() {
-		Vector2 vec = background.mainTextureOffset;
-		vec.Set (vec.x + (1 * Time.deltaTime), 0);
-		background.mainTextureOffset = vec;
 	}
 
 	IEnumerator moveHero() {
