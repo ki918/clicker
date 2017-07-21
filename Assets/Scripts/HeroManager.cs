@@ -27,15 +27,20 @@ public class HeroManager : MonoBehaviour {
 	}
 
 	void Start() {
+		// moveHero 함수 시작
 		StartCoroutine ("moveHero");
 	}
 
 	void Update() {
+		// 배경화면 스크롤링
 		Vector2 vec = background.mainTextureOffset;
 		vec.Set (vec.x + (1 * Time.deltaTime), 0);
 		background.mainTextureOffset = vec;
 	}
 
+	/**
+	 * 주인공 애니메이션
+	 * */
 	IEnumerator moveHero() {
 		while (true) {
 			Vector3 vec = heroImg.transform.localScale;
@@ -60,6 +65,9 @@ public class HeroManager : MonoBehaviour {
 		}
 	}
 
+	/**
+	 * 충돌 판정
+	 * */
 	void OnTriggerEnter2D(Collider2D collider) {
 		isRight = !isRight;
 	}

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class DataController : MonoBehaviour {
 	private static DataController dataController;
@@ -109,6 +110,8 @@ public class DataController : MonoBehaviour {
 		}
 	}
 
+
+
 	public int getGoldPerSec() {
 		int result = 0;
 
@@ -136,3 +139,4 @@ public class DataController : MonoBehaviour {
 		}
 	}
 }
+	
