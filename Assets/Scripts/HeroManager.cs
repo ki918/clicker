@@ -30,13 +30,6 @@ public class HeroManager : MonoBehaviour {
 		StartCoroutine ("moveHero");
 	}
 
-	void Update() {
-		// 배경화면 스크롤링
-		Vector2 vec = background.mainTextureOffset;
-		vec.Set (vec.x + (1 * Time.deltaTime), 0);
-		background.mainTextureOffset = vec;
-	}
-
 	/**
 	 * 주인공 애니메이션
 	 * */
