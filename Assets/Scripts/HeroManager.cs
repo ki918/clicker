@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class HeroManager : MonoBehaviour {
 	private static HeroManager instance;
 	public Image heroImg;
-	public Material background;
 
 	private int spriteNum = 2;
 	private float heroAnimationSpeed = 0.03f;
