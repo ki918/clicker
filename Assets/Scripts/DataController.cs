@@ -2,15 +2,24 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class DataController : MonoBehaviour {
+public class DataController : MonoBehaviour
+{
 	private static DataController dataController;
 	private int m_Gold = 0;
 	private int m_GoldPerClick = 0;
 	private ItemButton[] itemButtons;
-	public GameObject itemObject;
+	private GameObject viewItem;
+
+	public GameObject firstItem;
+	public GameObject secondItem;
+	public GameObject thirdItem;
 	public GameObject itemZone;
 
-	public static DataController getInstance() {
+	/**
+	 * 싱글톤 생성
+	 * */
+	public static DataController getInstance ()
+	{
 		if (dataController == null) {
 			dataController = FindObjectOfType<DataController> ();
 
@@ -24,7 +33,8 @@ public class DataController : MonoBehaviour {
 		return dataController;
 	}
 
-	void Awake() {
+	void Awake ()
+	{
 		//m_Gold = PlayerPrefs.GetInt ("Gold");
 		m_Gold = 10000000;
 		m_GoldPerClick = PlayerPrefs.GetInt ("GoldPerClick", 1);
@@ -32,44 +42,78 @@ public class DataController : MonoBehaviour {
 		Screen.SetResolution (Screen.width, Screen.width * 16 / 10, true);
 	}
 
-	void Start() {
+	void Start ()
+	{
+		//< addGoldPerSecLoop 함수 루프 시작
 		StartCoroutine ("addGoldPerSecLoop");
 	}
 
-	public void setGold(int newGold) {
+	/**
+	 * 골드 저장용
+	 * newGold : 저장 할 골드
+	 * */
+	public void setGold (int newGold)
+	{
 		m_Gold = newGold;
 		PlayerPrefs.SetInt ("Gold", m_Gold);
 	}
 
-	public void addGold(int newGold) {
+	/**
+	 * 골드 증가
+	 * newGold : 증가량
+	 * */
+	public void addGold (int newGold)
+	{
 		m_Gold += newGold;
 		setGold (m_Gold);
 	}
 
-	public void subGold(int newGold) {
+	/**
+	 * 골드 감소
+	 * newGold : 감소량
+	 * */
+	public void subGold (int newGold)
+	{
 		m_Gold -= newGold;
 		setGold (m_Gold);
 	}
 
-	public int getGold() {
+	/**
+	 * 현재 골드량
+	 * return int 현재 골드
+	 * */
+	public int getGold ()
+	{
 		return m_Gold;
 	}
 
-	public int getGoldPerClick() {
+	/**
+	 * 터치 당 증가 골드량
+	 * return int 증가 골드량
+	 * */
+	public int getGoldPerClick ()
+	{
 		return m_GoldPerClick;
 	}
 
-	public void setGoldPerClick(int newGoldPerClick) {
+	/**
+	 * 터치 당 골드 증가
+	 * newGoldPerClick : 터치 당 증가량
+	 * */
+	public void setGoldPerClick (int newGoldPerClick)
+	{
 		m_GoldPerClick = newGoldPerClick;
 		PlayerPrefs.SetInt ("GoldPerClick", m_GoldPerClick);
 	}
 
-	public void addGoldPerClick(int newGoldPerClick) {
+	public void addGoldPerClick (int newGoldPerClick)
+	{
 		m_GoldPerClick += newGoldPerClick;
 		PlayerPrefs.SetInt ("GoldPerClick", m_GoldPerClick);
 	}
 
-	public void loadUpgradeButton(UpgradeButton upgradeButton) {
+	public void loadUpgradeButton (UpgradeButton upgradeButton)
+	{
 		string key = upgradeButton.upgradeName;
 
 		upgradeButton.level = PlayerPrefs.GetInt (key + "_level", 1);
@@ -77,7 +121,8 @@ public class DataController : MonoBehaviour {
 		upgradeButton.currentCost = PlayerPrefs.GetInt (key + "_cost", upgradeButton.startCurrentCost);
 	}
 
-	public void saveUpgradeButton(UpgradeButton upgradeButton) {
+	public void saveUpgradeButton (UpgradeButton upgradeButton)
+	{
 		string key = upgradeButton.upgradeName;
 
 		PlayerPrefs.SetInt (key + "_level", upgradeButton.level);
@@ -85,7 +130,8 @@ public class DataController : MonoBehaviour {
 		PlayerPrefs.SetInt (key + "_cost", upgradeButton.currentCost);
 	}
 
-	public void loadItemButton(ItemButton itemButton) {
+	public void loadItemButton (ItemButton itemButton)
+	{
 		string key = itemButton.itemName;
 
 		itemButton.level = PlayerPrefs.GetInt (key + "_level", 0);
@@ -99,7 +145,8 @@ public class DataController : MonoBehaviour {
 		}
 	}
 
-	public void saveItemButton(ItemButton itemButton) {
+	public void saveItemButton (ItemButton itemButton)
+	{
 		string key = itemButton.itemName;
 
 		PlayerPrefs.SetInt (key + "_level", itemButton.level);
@@ -115,7 +162,8 @@ public class DataController : MonoBehaviour {
 
 
 
-	public int getGoldPerSec() {
+	public int getGoldPerSec ()
+	{
 		int result = 0;
 
 		for (int i = 0; i < itemButtons.Length; i++) {
@@ -127,8 +175,14 @@ public class DataController : MonoBehaviour {
 		return result;
 	}
 
-	public void TouchScreen(Vector3 pos) {
+	/**
+	 * 터치 이벤트 처리
+	 * pos : 터치 좌표
+	 * */
+	public void TouchScreen (Vector3 pos)
+	{
 		int gold = getGoldPerClick ();
+		//< 아이템 랜덤 생성
 		int rand = Random.Range (1, 101);
 		addGold (gold);
 
@@ -136,24 +190,34 @@ public class DataController : MonoBehaviour {
 		dropItem ();
 	}
 
-	private void dropItem() {
-		GameObject obj = (GameObject)Instantiate (itemObject, new Vector3 (1.0f, 1.0f, 0.0f), Quaternion.identity);
-		obj.transform.parent = itemZone.transform;
-		obj.transform.localScale = Vector3.one;
-		float rand = Random.Range (-100.0f, 100.0f);
-		obj.transform.localPosition = new Vector3 (1.0f, rand, 0.0f);
+	/**
+	 * 아이템 생성
+	 * */
+	private void dropItem ()
+	{
+		if (viewItem == null) {
+			//< 프리팹 생성
+			viewItem = (GameObject)Instantiate (firstItem, new Vector3 (1.0f, 1.0f, 0.0f), Quaternion.identity);
+			viewItem.transform.SetParent (itemZone.transform);
+			viewItem.transform.localScale = Vector3.one;
+			float rand = Random.Range (-100.0f, 100.0f);
+			viewItem.transform.localPosition = new Vector3 (1.0f, rand, 0.0f);
 
-		UIManager.getInstance ().setItem (obj);
+			UIManager.getInstance ().setItem (viewItem);
+		}
 	}
 
-	IEnumerator addGoldPerSecLoop() {
-		while(true) {
+	IEnumerator addGoldPerSecLoop ()
+	{
+		while (true) {
 			addGold (getGoldPerSec ());
 
 			yield return new WaitForSeconds (1.0f);
 		}
 	}
-	public void ReturnToTitle(){
+
+	public void ReturnToTitle ()
+	{
 		SceneManager.LoadScene ("Title");
 	}
 }

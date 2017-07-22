@@ -10,7 +10,8 @@ public class UIManager : MonoBehaviour {
 	public Text goldPerSecDisplayer;
 	public GameObject settingPanel;
 	public Material background;
-	public int moveSpeed;
+	public float moveSpeed;
+	public float heroSpeed;
 
 	private ArrayList panelList;
 	private GameObject moveItemObject;
@@ -42,6 +43,7 @@ public class UIManager : MonoBehaviour {
 	}
 
 	void Update() {
+		HeroManager.getInstance ().changeAnimationSpeed (heroSpeed / moveSpeed);
 		goldDisplayer.text = "GOLD: " + DataController.getInstance ().getGold ();
 		goldPerDisplayer.text = "GOLD PER CLICK: " + DataController.getInstance ().getGoldPerClick ();
 		goldPerSecDisplayer.text = "GOLD PER SEC: " + DataController.getInstance ().getGoldPerSec ();
@@ -53,6 +55,7 @@ public class UIManager : MonoBehaviour {
 		if (moveItemObject != null) {
 			//< 아이템 이동
 			moveItemObject.transform.Translate (Vector3.left * (moveSpeed * 280) * Time.deltaTime);
+			HeroManager.getInstance ().moveToItem (moveSpeed, moveItemObject);
 
 			//< 아이템 화면 밖으로 나가는 경우
 			Vector3 itemVec = Camera.main.WorldToViewportPoint(moveItemObject.transform.position);

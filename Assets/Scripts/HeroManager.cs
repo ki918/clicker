@@ -9,7 +9,6 @@ public class HeroManager : MonoBehaviour {
 
 	private int spriteNum = 2;
 	private float heroAnimationSpeed = 0.03f;
-	private bool isRight = true;
 
 	public static HeroManager getInstance() {
 		if (instance == null) {
@@ -35,17 +34,8 @@ public class HeroManager : MonoBehaviour {
 	 * */
 	IEnumerator moveHero() {
 		while (true) {
-			Vector3 vec = heroImg.transform.localScale;
-
-			if (isRight) {
-				vec.x = Mathf.Abs (vec.x);
-				heroImg.transform.localScale = vec;
-			} else {
-				vec.x = -Mathf.Abs (vec.x);
-				heroImg.transform.localScale = vec;
-			}
-
 			heroImg.sprite = Resources.Load<Sprite> ("Hero/hero_0" + spriteNum) as Sprite;
+
 				
 			spriteNum++;
 
@@ -61,6 +51,33 @@ public class HeroManager : MonoBehaviour {
 	 * 충돌 판정
 	 * */
 	void OnTriggerEnter2D(Collider2D collider) {
-		isRight = !isRight;
+		
+	}
+
+	/**
+	 * 아이템 줍기
+	 * speed : 이동속도
+	 * item : 아이템
+	 * */
+	public void moveToItem(float speed, GameObject item) {
+		if (item != null) {
+			float y = item.transform.localPosition.y;
+			float height = ((RectTransform)item.transform).rect.height;
+			y += height;
+
+			if (y > heroImg.transform.localPosition.y) {
+				heroImg.transform.Translate (0, speed, 0);
+			} else if (y < heroImg.transform.localPosition.y) {
+				heroImg.transform.Translate (0, -speed, 0);
+			}
+		}
+	}
+
+	/**
+	 * 주인공 애니메이션 속도 변경
+	 * speed : 애니메이션 속도
+	 * */
+	public void changeAnimationSpeed(float speed) {
+		heroAnimationSpeed = speed;
 	}
 }
