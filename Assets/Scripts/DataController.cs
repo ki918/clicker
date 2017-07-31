@@ -35,8 +35,8 @@ public class DataController : MonoBehaviour
 
 	void Awake ()
 	{
-		//m_Gold = PlayerPrefs.GetInt ("Gold");
-		m_Gold = 10000000;
+		m_Gold = PlayerPrefs.GetInt ("Gold");
+		//m_Gold = 10000000;
 		m_GoldPerClick = PlayerPrefs.GetInt ("GoldPerClick", 1);
 		itemButtons = FindObjectsOfType<ItemButton> ();
 		Screen.SetResolution (Screen.width, Screen.width * 16 / 10, true);
@@ -44,7 +44,7 @@ public class DataController : MonoBehaviour
 
 	void Start ()
 	{
-		//< addGoldPerSecLoop 함수 루프 시작
+		// addGoldPerSecLoop 함수 루프 시작
 		StartCoroutine ("addGoldPerSecLoop");
 	}
 

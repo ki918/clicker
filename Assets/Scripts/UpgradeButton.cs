@@ -35,7 +35,7 @@ public class UpgradeButton : MonoBehaviour {
 	 * */
 	public void purchaseUpgrade() {
 
-		//Restoration();
+		Restoration();
 
 		if (DataController.getInstance ().getGold () >= currentCost) {
 			DataController.getInstance ().subGold (currentCost);
@@ -43,10 +43,6 @@ public class UpgradeButton : MonoBehaviour {
 			DataController.getInstance ().addGoldPerClick (goldByUpgrade);
 
 			UpdateUpgrade ();
-
-
-			//씬 전환
-			//DataController.getInstance().ReturnToTitle();
 		}
 	}
 
@@ -69,11 +65,13 @@ public class UpgradeButton : MonoBehaviour {
 		upgradeDisplayer.text = upgradeName + "\nCost: " + currentCost + "\nLevel: " + level + "\nNext New GoldPerClick: " + goldByUpgrade;
 	}
 		
-	// boolean형으로
+
 	public void Restoration() {
-		if (this.gameObject.tag.Equals("Restoration") && level < 20) {
+		if (this.gameObject.tag.Equals ("Restoration") && level < 20) {
 			UpdateUpgrade ();
+		} else if (this.gameObject.tag.Equals("Restoration") && level > 20) {
+			//씬 전환
+			DataController.getInstance().ReturnToTitle();
 		}
 	}
-
 }
