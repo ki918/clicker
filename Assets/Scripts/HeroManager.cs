@@ -51,7 +51,8 @@ public class HeroManager : MonoBehaviour {
 	 * 충돌 판정
 	 * */
 	void OnTriggerEnter2D(Collider2D collider) {
-		
+		//< 아이템 획득
+		UIManager.getInstance ().deleteItem ();
 	}
 
 	/**

@@ -11,9 +11,8 @@ public class DataController : MonoBehaviour
 	private GameObject viewItem;
 
 	public GameObject firstItem;
-	public GameObject secondItem;
-	public GameObject thirdItem;
 	public GameObject itemZone;
+	public float mItemDropChance;
 
 	/**
 	 * 싱글톤 생성
@@ -183,11 +182,14 @@ public class DataController : MonoBehaviour
 	{
 		int gold = getGoldPerClick ();
 		//< 아이템 랜덤 생성
-		int rand = Random.Range (1, 101);
+		int rand = Random.Range (1, 10001);
+		Debug.Log ("드랍 확률 : " + rand);
+		if ((mItemDropChance) >= rand) {
+			dropItem ();
+		}
 		addGold (gold);
 
 		AudioManager.getInstance ().playSFX (0);
-		dropItem ();
 	}
 
 	/**

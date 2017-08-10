@@ -66,6 +66,9 @@ public class UIManager : MonoBehaviour {
 		}
 	}
 
+	/**
+	 * 하단 버튼 선택에 따라 리스트 변경
+	 * */
 	public void changeBottomView(string tag) {
 		for (int i = 0; i < panelList.Count; i++) {
 			GameObject obj = (GameObject)panelList [i];
@@ -78,15 +81,33 @@ public class UIManager : MonoBehaviour {
 		}
 	}
 
+	/**
+	 * 환경설정 UI Show
+	 * */
 	public void ShowSettingPanel() {
 		settingPanel.SetActive (true);
 	}
 
+	/**
+	 * 환경설정 UI hide
+	 * */
 	public void HideSettingPanel() {
 		settingPanel.SetActive (false);
 	}
 
+	/**
+	 * 아이템 오브젝트 저장
+	 * */
 	public void setItem(GameObject item) {
 		moveItemObject = item;
+	}
+
+	/**
+	 * 아이템 오브젝트 삭제
+	 * */
+	public void deleteItem() {
+		if (moveItemObject != null) {
+			Destroy (moveItemObject);
+		}
 	}
 }
