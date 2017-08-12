@@ -35,8 +35,8 @@ public class DataController : MonoBehaviour
 
 	void Awake ()
 	{
-		m_Gold = PlayerPrefs.GetInt ("Gold");
-		//m_Gold = 10000000;
+		//m_Gold = PlayerPrefs.GetInt ("Gold");
+		m_Gold = 10000000;
 		m_GoldPerClick = PlayerPrefs.GetInt ("GoldPerClick", 1);
 		itemButtons = FindObjectsOfType<ItemButton> ();
 		Screen.SetResolution (Screen.width, Screen.width * 16 / 10, true);
@@ -182,7 +182,7 @@ public class DataController : MonoBehaviour
 	public void TouchScreen (Vector3 pos)
 	{
 		int gold = getGoldPerClick ();
-		//< 아이템 랜덤 생성
+		//< 아이템 랜덤 생성	
 		int rand = Random.Range (1, 101);
 		addGold (gold);
 
@@ -215,6 +215,23 @@ public class DataController : MonoBehaviour
 			yield return new WaitForSeconds (1.0f);
 		}
 	}
+	/*
+	 * 인트로 깜빡깜빡
+	bool flags;
+	IEnumerator addGoldPerSecLoop ()
+	{
+		while (true) {
+			flags = !flags;
+				if(flags) {
+				settext = "";
+				}else {
+				settext = "Touch to scre";
+				}
+
+			yield return new WaitForSeconds (1.0f);
+		}
+	}
+	*/
 
 	public void ReturnToTitle ()
 	{

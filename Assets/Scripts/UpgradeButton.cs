@@ -22,10 +22,13 @@ public class UpgradeButton : MonoBehaviour {
 	public float upgradePow = 1.07f;
 	public float costPow = 3.14f;
 
+
+
 	void Start() {
 		// 게임 시작시 버튼들의 저장 값을 가져온다
 		DataController.getInstance ().loadUpgradeButton (this);
 		UpdateUI ();
+		//PlayerPrefs.DeleteAll ();
 
 	}
 
@@ -67,10 +70,12 @@ public class UpgradeButton : MonoBehaviour {
 		
 
 	public void Restoration() {
+
 		if (this.gameObject.tag.Equals ("Restoration") && level < 20) {
 			UpdateUpgrade ();
-		} else if (this.gameObject.tag.Equals("Restoration") && level > 20) {
+		} else if (this.gameObject.tag.Equals("Restoration") && level == 20) {
 			//씬 전환
+			this.level = 0;
 			DataController.getInstance().ReturnToTitle();
 		}
 	}
