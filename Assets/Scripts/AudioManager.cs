@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class AudioManager : MonoBehaviour {
 	private static AudioManager instance;
 	public AudioSource bgmSource;
 	public AudioSource sfxSource;
 	public AudioClip[] stageBGM;
 	public AudioClip[] gameSFX;
+
+	private const int INTRO_BGM = 0;
+	private const int IN_GAME_BGM = 1;
+	private const int CHNAGE_SCENE = 2;
 
 	public static AudioManager getInstance() {
 		if (instance == null) {
@@ -24,15 +29,30 @@ public class AudioManager : MonoBehaviour {
 	}
 
 	void Start() {
-		playBGM (1);
+		
 	}
 
 	/**
-	 * 배경음악 재생 시작
-	 * stage : 현재 스테이지 정보
+	 * 인게임 배경음악 재생 시작
 	 * */
-	public void playBGM(int stage) {
-		bgmSource.clip = stageBGM [stage - 1];
+	public void playGameBGM() {
+		bgmSource.clip = stageBGM [IN_GAME_BGM];
+		bgmSource.Play ();
+	}
+
+	/**
+	 * 인트로 배경음악 재생 시작
+	 * */
+	public void playIntroBGM() {
+		bgmSource.clip = stageBGM [INTRO_BGM];
+		bgmSource.Play ();
+	}
+
+	/**
+	 * 씬 전환 배경음악 재생 시작
+	 * */
+	public void playChangeSceneBGM() {
+		bgmSource.clip = stageBGM [CHNAGE_SCENE];
 		bgmSource.Play ();
 	}
 

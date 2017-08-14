@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour {
 	public Text goldDisplayer;
 	public Text goldPerDisplayer;
 	public Text goldPerSecDisplayer;
+	public Text stageDisplayer;
 	public GameObject settingPanel;
 	public Material background;
 	public float moveSpeed;
@@ -40,6 +41,8 @@ public class UIManager : MonoBehaviour {
 
 			obj.SetActive (false);
 		}
+
+		stageDisplayer.text = DataController.getInstance ().getStage () + "Stage";
 	}
 
 	void Update() {
