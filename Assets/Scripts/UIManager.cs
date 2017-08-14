@@ -44,9 +44,9 @@ public class UIManager : MonoBehaviour {
 
 	void Update() {
 		HeroManager.getInstance ().changeAnimationSpeed (heroSpeed / moveSpeed);
-		goldDisplayer.text = "GOLD: " + DataController.getInstance ().getGold ();
-		goldPerDisplayer.text = "GOLD PER CLICK: " + DataController.getInstance ().getGoldPerClick ();
-		goldPerSecDisplayer.text = "GOLD PER SEC: " + DataController.getInstance ().getGoldPerSec ();
+		goldDisplayer.text = DataController.getInstance ().getGold () + "G";
+		goldPerDisplayer.text = DataController.getInstance ().getGoldPerClick () + "G/클릭";
+		goldPerSecDisplayer.text = DataController.getInstance ().getGoldPerSec () + "G/초";
 
 		Vector2 vec = background.mainTextureOffset;
 		vec.Set (vec.x + (moveSpeed * Time.deltaTime), 0);

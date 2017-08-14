@@ -9,6 +9,7 @@ public class DataController : MonoBehaviour
 	private int m_GoldPerClick = 0;
 	private ItemButton[] itemButtons;
 	private GameObject viewItem;
+	private int mCurrentStage;
 
 	public GameObject firstItem;
 	public GameObject itemZone;
@@ -159,6 +160,29 @@ public class DataController : MonoBehaviour
 		}
 	}
 
+	/**
+	 * 현재 스테이지 저장
+	 * */
+	public void saveStage(int stage) {
+		string key = "STAGE_NUMBER";
+
+		PlayerPrefs.SetInt (key, stage);
+	}
+
+	/**
+	 * 현재 스테이지 불러오기
+	 * */
+	public void loadStage() {
+		mCurrentStage = PlayerPrefs.GetInt ("STAGE_NUMBER", 1);
+	}
+
+	/**
+	 * 스테이지 정보 반환
+	 * */
+	public int getStage() {
+		return mCurrentStage;
+	}
+		
 	public int getGoldPerSec ()
 	{
 		int result = 0;
