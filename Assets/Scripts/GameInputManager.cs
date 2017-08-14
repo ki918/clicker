@@ -15,12 +15,6 @@ public class GameInputManager : MonoBehaviour {
 		}
 
 		if (Input.GetMouseButtonDown (0)) {
-			if (EventSystem.current.IsPointerOverGameObject () == false) {
-				if (SceneManager.GetActiveScene ().buildIndex == 0) {
-					DataController.getInstance ().TouchScreen (Input.mousePosition);
-				} else if (SceneManager.GetActiveScene ().buildIndex == 2) {
-					Intro.getInstance ().TouchScreen (Input.mousePosition);
-				}
 			if (EventSystem.current.IsPointerOverGameObject (0) == true) {
 				return;
 			}
