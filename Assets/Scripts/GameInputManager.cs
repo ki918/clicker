@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class GameInputManager : MonoBehaviour {
 	/**
@@ -15,7 +16,10 @@ public class GameInputManager : MonoBehaviour {
 
 		if (Input.GetMouseButtonDown (0)) {
 			if (EventSystem.current.IsPointerOverGameObject () == false) {
+				if(SceneManager.GetActiveScene().buildIndex == 0)
 				DataController.getInstance ().TouchScreen (Input.mousePosition);
+				else if(SceneManager.GetActiveScene().buildIndex == 2)
+				Intro.getInstance ().TouchScreen (Input.mousePosition);
 			}
 		}
 	}

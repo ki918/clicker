@@ -159,8 +159,6 @@ public class DataController : MonoBehaviour
 		}
 	}
 
-
-
 	public int getGoldPerSec ()
 	{
 		int result = 0;
@@ -190,6 +188,8 @@ public class DataController : MonoBehaviour
 		addGold (gold);
 
 		AudioManager.getInstance ().playSFX (0);
+
+
 	}
 
 	/**
@@ -217,23 +217,6 @@ public class DataController : MonoBehaviour
 			yield return new WaitForSeconds (1.0f);
 		}
 	}
-	/*
-	 * 인트로 깜빡깜빡
-	bool flags;
-	IEnumerator addGoldPerSecLoop ()
-	{
-		while (true) {
-			flags = !flags;
-				if(flags) {
-				settext = "";
-				}else {
-				settext = "Touch to scre";
-				}
-
-			yield return new WaitForSeconds (1.0f);
-		}
-	}
-	*/
 
 	public void ReturnToTitle ()
 	{
