@@ -38,6 +38,7 @@ public class DataController : MonoBehaviour
 		//m_Gold = PlayerPrefs.GetInt ("Gold");
 		m_Gold = 10000000;
 		m_GoldPerClick = PlayerPrefs.GetInt ("GoldPerClick", 1);
+		loadStage ();
 		itemButtons = FindObjectsOfType<ItemButton> ();
 		Screen.SetResolution (Screen.width, Screen.width * 16 / 10, true);
 	}
@@ -182,6 +183,14 @@ public class DataController : MonoBehaviour
 	public int getStage() {
 		return mCurrentStage;
 	}
+
+	/**
+	 * 스테이지 정보 저장
+	 * */
+	public void setStage(int stage) {
+		mCurrentStage = stage;
+		saveStage (stage);
+	}
 		
 	public int getGoldPerSec ()
 	{
@@ -212,8 +221,6 @@ public class DataController : MonoBehaviour
 		addGold (gold);
 
 		AudioManager.getInstance ().playSFX (0);
-
-
 	}
 
 	/**
