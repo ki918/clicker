@@ -25,10 +25,8 @@ public class GameTextControl : MonoBehaviour {
 		{
 			readyText.text = "";
 			yield return new WaitForSeconds (0.5f);
-			Debug.Log ("메");
 			readyText.text = "Touch to Screen";
 			yield return new WaitForSeconds (0.5f);
-			Debug.Log ("롱");
 		}
 	}
 
