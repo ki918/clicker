@@ -32,6 +32,6 @@ public class Intro : MonoBehaviour {
 
 	public void TouchScreen (Vector3 pos)
 	{
-		SceneManager.LoadScene (0);
+		SceneManager.LoadScene (1);
 	}
 }

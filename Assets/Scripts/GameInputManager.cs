@@ -23,9 +23,9 @@ public class GameInputManager : MonoBehaviour {
 				return;
 			}
 				
-			if (SceneManager.GetActiveScene ().buildIndex == 0) {
+			if (SceneManager.GetActiveScene ().buildIndex == 1) {
 				DataController.getInstance ().TouchScreen (Input.mousePosition);
-			} else if (SceneManager.GetActiveScene ().buildIndex == 2) {
+			} else if (SceneManager.GetActiveScene ().buildIndex == 0) {
 				Intro.getInstance ().TouchScreen (Input.mousePosition);
 			}
 		}
