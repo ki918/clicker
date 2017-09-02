@@ -48,7 +48,7 @@ public class DataController : MonoBehaviour
 		// addGoldPerSecLoop 함수 루프 시작
 		StartCoroutine ("addGoldPerSecLoop");
 	}
-
+		
 	/**
 	 * 골드 저장용
 	 * newGold : 저장 할 골드
@@ -161,25 +161,17 @@ public class DataController : MonoBehaviour
 		}
 	}
 
-	/*
-	 //배경음 효과음
-	  public void loadSettingButton(SettingButton settingButton)
-	{
-		string key = settingButton.BGMVolumeChange;
-		string key2 = settingButton.SFXVolumeChange;
-
-		settingButton.BGMVolumeChange = PlayerPrefs.GetInt (key);
-		settingButton.SFXVolumeChange = PlayerPrefs.GetInt (key2);
-	}
-
-	public void SaveSettingButton(SettingButton settingButton)
-	{
-		 
-	}
-	*/
-
-
 	/**
+	* 현재 스테이지 저장
+	* */
+	public void saveOpening(int count) {
+		string key = "OPENING";
+
+		PlayerPrefs.SetInt (key, count);
+	}
+
+
+	/*
 	 * 현재 스테이지 저장
 	 * */
 	public void saveStage(int stage) {
@@ -188,7 +180,7 @@ public class DataController : MonoBehaviour
 		PlayerPrefs.SetInt (key, stage);
 	}
 
-	/**
+	/*
 	 * 현재 스테이지 불러오기
 	 * */
 	public void loadStage() {

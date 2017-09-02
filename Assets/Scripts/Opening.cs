@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Opening : MonoBehaviour {
 	public Image button; 
 	public static Opening opening;
-
+	int count = 0;
 	public static Opening getInstance ()
 	{
 		if (opening == null) {
@@ -32,6 +32,7 @@ public class Opening : MonoBehaviour {
 
 	public void TouchScreen (Vector3 pos)
 	{
-		SceneManager.LoadScene (3);
+		SceneManager.LoadScene (2);
+		count++;
 	}
 }

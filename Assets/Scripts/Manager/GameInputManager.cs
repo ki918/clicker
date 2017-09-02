@@ -24,17 +24,17 @@ public class GameInputManager : MonoBehaviour {
 				return;
 			}
 
-			if (SceneManager.GetActiveScene ().buildIndex == 1) {
+			if (SceneManager.GetActiveScene ().buildIndex == 2) {
 				DataController.getInstance ().TouchScreen (Input.mousePosition);
-			}else if (SceneManager.GetActiveScene ().buildIndex == 0) {
+			}else if (SceneManager.GetActiveScene ().buildIndex == 1) {
 				if (count == 1) {
 					Opening.getInstance ().TouchScreen (Input.mousePosition);
-					count++;
+					 
 				} else if (count == 2)
 				{
 					Intro.getInstance ().TouchScreen (Input.mousePosition);
 				}
-			}else if (SceneManager.GetActiveScene ().buildIndex == 3) {
+			}else if (SceneManager.GetActiveScene ().buildIndex == 0) {
 				Intro.getInstance ().TouchScreen (Input.mousePosition);
 			} 
 		}

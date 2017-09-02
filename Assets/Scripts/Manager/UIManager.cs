@@ -35,6 +35,8 @@ public class UIManager : MonoBehaviour {
 		panelList = new ArrayList ();
 		panelList.Add (GameObject.FindWithTag ("UpgradePanel"));
 		panelList.Add (GameObject.FindWithTag ("ItemPanel"));
+		panelList.Add (GameObject.FindWithTag ("SkillPanel"));
+
 
 		for (int i = 1; i < panelList.Count; i++) {
 			GameObject obj = (GameObject)panelList [i];

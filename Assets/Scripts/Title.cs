@@ -19,7 +19,7 @@ public class Title : MonoBehaviour {
 	}
 
 	public void Click(){
-		SceneManager.LoadScene (1);
+		SceneManager.LoadScene (2);
 	}
 }
  
