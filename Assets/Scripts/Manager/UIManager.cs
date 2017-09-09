@@ -36,6 +36,7 @@ public class UIManager : MonoBehaviour {
 		panelList.Add (GameObject.FindWithTag ("UpgradePanel"));
 		panelList.Add (GameObject.FindWithTag ("ItemPanel"));
 		panelList.Add (GameObject.FindWithTag ("SkillPanel"));
+		AudioManager.getInstance ().playGameBGM ();
 
 
 		for (int i = 1; i < panelList.Count; i++) {
