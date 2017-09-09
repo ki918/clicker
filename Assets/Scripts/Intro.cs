@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Intro : MonoBehaviour {
 	public Image button; 
 	public static Intro intro;
+	int count = 1;
 
 	public static Intro getInstance ()
 	{
@@ -24,6 +25,7 @@ public class Intro : MonoBehaviour {
 
 	void Start () {
 		Screen.SetResolution (Screen.width, Screen.width * 16 / 10, true);
+		count = DataController.getInstance ().loadCount ();
 	}
 
 	void Update () {
@@ -32,6 +34,11 @@ public class Intro : MonoBehaviour {
 
 	public void TouchScreen (Vector3 pos)
 	{
-		SceneManager.LoadScene (1);
+		if (count == 1) {
+			SceneManager.LoadScene (1);
+			DataController.getInstance ().saveCount (2);
+		} else if (count == 2) {
+			SceneManager.LoadScene (2);
+		}
 	}
 }

@@ -7,7 +7,11 @@ public class GameInputManager : MonoBehaviour {
 	/**
 	 * 터치 이벤트 확인
 	 * */
-	int count = 1;
+
+	private const int INTRO_SCENE = 0;
+	private const int OPENING_SCENE = 1;
+	private const int MAIN_SCENE = 2;
+
 	public void Update() {
 		if (Application.platform == RuntimePlatform.Android) {
 			if (Input.GetKey (KeyCode.Escape)) {
@@ -24,19 +28,13 @@ public class GameInputManager : MonoBehaviour {
 				return;
 			}
 
-			if (SceneManager.GetActiveScene ().buildIndex == 2) {
+			if (SceneManager.GetActiveScene ().buildIndex == MAIN_SCENE) {
 				DataController.getInstance ().TouchScreen (Input.mousePosition);
-			}else if (SceneManager.GetActiveScene ().buildIndex == 1) {
-				if (count == 1) {
-					Opening.getInstance ().TouchScreen (Input.mousePosition);
-					 
-				} else if (count == 2)
-				{
-					Intro.getInstance ().TouchScreen (Input.mousePosition);
-				}
-			}else if (SceneManager.GetActiveScene ().buildIndex == 0) {
+			}else if (SceneManager.GetActiveScene ().buildIndex == OPENING_SCENE) {
+				Opening.getInstance ().TouchScreen (Input.mousePosition);
+			}else if (SceneManager.GetActiveScene ().buildIndex == INTRO_SCENE ) {
 				Intro.getInstance ().TouchScreen (Input.mousePosition);
-			} 
+			}
 		}
 	}
 }

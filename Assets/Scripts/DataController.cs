@@ -161,13 +161,47 @@ public class DataController : MonoBehaviour
 		}
 	}
 
+	public void loadSkillButton (SkillButton skillButton)
+	{
+		string key = skillButton.SkillName;
+
+		skillButton.level = PlayerPrefs.GetInt (key + "_level", 0);
+		skillButton.goldPerSec = PlayerPrefs.GetInt (key + "_GoldBySec", skillButton.startGoldPerSec);
+		skillButton.currentCost = PlayerPrefs.GetInt (key + "_cost", skillButton.startCurrentCost);
+
+		if (PlayerPrefs.GetInt (key + "_purchase") == 1) {
+			skillButton.isPurchase = true;
+		} else {
+			skillButton.isPurchase = false;
+		}
+	}
+
+	public void saveSkillButton (SkillButton skillButton)
+	{
+		string key = skillButton.SkillName;
+
+		PlayerPrefs.SetInt (key + "_level", skillButton.level);
+		PlayerPrefs.SetInt (key + "_GoldBySec", skillButton.goldPerSec);
+		PlayerPrefs.SetInt (key + "_cost", skillButton.currentCost);
+
+		if (skillButton.isPurchase) {
+			PlayerPrefs.SetInt (key + "_purchase", 1);
+		} else {
+			PlayerPrefs.SetInt (key + "_purchase", 0);
+		}
+	}
+
 	/**
 	* 현재 스테이지 저장
 	* */
-	public void saveOpening(int count) {
-		string key = "OPENING";
+	public void saveCount(int count) {
+		string key = "count";
 
 		PlayerPrefs.SetInt (key, count);
+	}
+
+	public int loadCount() {
+		return PlayerPrefs.GetInt ("count", 1);
 	}
 
 
@@ -182,7 +216,7 @@ public class DataController : MonoBehaviour
 
 	/*
 	 * 현재 스테이지 불러오기
-	 * */
+	 * */	
 	public void loadStage() {
 		mCurrentStage = PlayerPrefs.GetInt ("STAGE_NUMBER", 1);
 	}
@@ -214,6 +248,7 @@ public class DataController : MonoBehaviour
 
 		return result;
 	}
+
 
 	/**
 	 * 터치 이벤트 처리
