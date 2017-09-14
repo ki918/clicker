@@ -14,6 +14,7 @@ public class GameTextControl : MonoBehaviour {
 			GameTextControl.instanece = this;
 	}
 	// Use this for initialization
+
 	void Start ()
 	{
 		StartCoroutine("ShowReady");

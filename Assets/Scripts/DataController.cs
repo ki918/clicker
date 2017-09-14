@@ -191,6 +191,38 @@ public class DataController : MonoBehaviour
 		}
 	}
 
+
+	public void loadCashButton (CashButton cashButton)
+	{
+		string key = cashButton.cashName;
+
+		cashButton.level = PlayerPrefs.GetInt (key + "_level", 0);
+		cashButton.goldPerSec = PlayerPrefs.GetInt (key + "_GoldBySec", cashButton.startGoldPerSec);
+		cashButton.currentCost = PlayerPrefs.GetInt (key + "_cost", cashButton.startCurrentCost);
+
+		if (PlayerPrefs.GetInt (key + "_purchase") == 1) {
+			cashButton.isPurchase = true;
+		} else {
+			cashButton.isPurchase = false;
+		}
+	}
+
+	public void saveCashButton (CashButton cashButton)
+	{
+		string key = cashButton.cashName;
+
+		PlayerPrefs.SetInt (key + "_level", cashButton.level);
+		PlayerPrefs.SetInt (key + "_GoldBySec", cashButton.goldPerSec);
+		PlayerPrefs.SetInt (key + "_cost", cashButton.currentCost);
+
+		if (cashButton.isPurchase) {
+			PlayerPrefs.SetInt (key + "_purchase", 1);
+		} else {
+			PlayerPrefs.SetInt (key + "_purchase", 0);
+		}
+	}
+
+
 	/**
 	* 현재 스테이지 저장
 	* */
