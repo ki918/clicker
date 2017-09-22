@@ -10,7 +10,7 @@ public class SkillButton : MonoBehaviour {
 	public int level;
 	[HideInInspector]
 	public int currentCost;
-	public int startCurrentCost = 1;
+	public int startCurrentCost = 100;
 	[HideInInspector]
 	public int goldPerSec;
 	public int startGoldPerSec = 1;
@@ -50,7 +50,6 @@ public class SkillButton : MonoBehaviour {
 			if (isPurchase) {
 				DataController.getInstance ().addGold (goldPerSec);
 			}
-
 			yield return new WaitForSeconds (1.0f);
 		}
 	}
@@ -59,8 +58,6 @@ public class SkillButton : MonoBehaviour {
 	 * 업그레이드 상태 반영
 	 * */
 	public void updateSkill() {
-		goldPerSec += startGoldPerSec * (int)Mathf.Pow (upgradePow, level);
-		currentCost = startCurrentCost * (int)Mathf.Pow (costPow, level);
 		DataController.getInstance ().saveSkillButton (this);
 		updateUI ();
 	}
@@ -69,6 +66,6 @@ public class SkillButton : MonoBehaviour {
 	 * 화면에 보여질 정보 업데이트
 	 * */
 	public void updateUI() {
-		SkillDisplayer.text = SkillName + "\nLevel: " + level + "\nCost: " + currentCost + "\nGold Per Second: " + goldPerSec + "\nIsPurchase: " + isPurchase;
+		SkillDisplayer.text = SkillName + "\nLevel: " + level + "\nCost: " + costPow;
 	}
 }

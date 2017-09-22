@@ -28,10 +28,6 @@ public class Intro : MonoBehaviour {
 		count = DataController.getInstance ().loadCount ();
 	}
 
-	void Update () {
-
-	}
-
 	public void TouchScreen (Vector3 pos)
 	{
 		if (count == 1) {

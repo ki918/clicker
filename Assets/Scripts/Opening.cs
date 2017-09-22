@@ -25,10 +25,6 @@ public class Opening : MonoBehaviour {
 		Screen.SetResolution (Screen.width, Screen.width * 16 / 10, true);
 	}
 
-	void Update () {
-
-	}
-
 	public void TouchScreen (Vector3 pos)
 	{
 		SceneManager.LoadScene (2);

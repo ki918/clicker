@@ -166,8 +166,7 @@ public class DataController : MonoBehaviour
 		string key = skillButton.SkillName;
 
 		skillButton.level = PlayerPrefs.GetInt (key + "_level", 0);
-		skillButton.goldPerSec = PlayerPrefs.GetInt (key + "_GoldBySec", skillButton.startGoldPerSec);
-		skillButton.currentCost = PlayerPrefs.GetInt (key + "_cost", skillButton.startCurrentCost);
+
 
 		if (PlayerPrefs.GetInt (key + "_purchase") == 1) {
 			skillButton.isPurchase = true;
@@ -181,8 +180,6 @@ public class DataController : MonoBehaviour
 		string key = skillButton.SkillName;
 
 		PlayerPrefs.SetInt (key + "_level", skillButton.level);
-		PlayerPrefs.SetInt (key + "_GoldBySec", skillButton.goldPerSec);
-		PlayerPrefs.SetInt (key + "_cost", skillButton.currentCost);
 
 		if (skillButton.isPurchase) {
 			PlayerPrefs.SetInt (key + "_purchase", 1);
