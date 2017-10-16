@@ -11,13 +11,16 @@ public class HeroManager : MonoBehaviour {
 	private float heroAnimationSpeed = 0.03f;
 
 	public static HeroManager getInstance() {
+		//< 인스턴스가 null인지 검사
 		if (instance == null) {
-			instance = FindObjectOfType<HeroManager> ();
-
-			if (instance == null) {
-				GameObject container = new GameObject ("HeroManager");
-
-				instance = container.AddComponent<HeroManager> ();
+			//< 인스턴스가 null이라면 화면에서 HeroManager Class를 찾아서 인스턴스에 넣어줌
+			instance = FindObjectOfType<HeroManager> (); 
+			//< 다시 null 검사
+			if (instance == null) { 
+				//< 화면에 HeroManager Class가 없어 null인 경우 GameObject를 새로 만들어서 HeroManager를 넣어줌
+				GameObject container = new GameObject ("HeroManager"); 
+				//< 새로 만든 GameObject를 현재 화면에 추가해줌
+				instance = container.AddComponent<HeroManager> (); 
 			}
 		}
 

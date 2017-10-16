@@ -10,6 +10,7 @@ public class DataController : MonoBehaviour
 	private ItemButton[] itemButtons;
 	private GameObject viewItem;
 	private int mCurrentStage;
+	public int x = 1;
 
 	public GameObject firstItem;
 	public GameObject itemZone;
@@ -35,11 +36,11 @@ public class DataController : MonoBehaviour
 
 	void Awake ()
 	{
-		//m_Gold = PlayerPrefs.GetInt ("Gold");
-		m_Gold = 10000000;
+		m_Gold = PlayerPrefs.GetInt ("Gold");
+		//m_Gold = 10000000;
 		m_GoldPerClick = PlayerPrefs.GetInt ("GoldPerClick", 1);
 		loadStage ();
-		itemButtons = FindObjectsOfType<ItemButton> ();
+			itemButtons = FindObjectsOfType<ItemButton> ();
 		Screen.SetResolution (Screen.width, Screen.width * 16 / 10, true);
 	}
 
@@ -94,8 +95,9 @@ public class DataController : MonoBehaviour
 	 * */
 	public int getGoldPerClick ()
 	{
-		return m_GoldPerClick;
+		return m_GoldPerClick * x;
 	}
+
 
 	/**
 	 * 터치 당 골드 증가
@@ -187,8 +189,7 @@ public class DataController : MonoBehaviour
 			PlayerPrefs.SetInt (key + "_purchase", 0);
 		}
 	}
-
-
+		
 	public void loadCashButton (CashButton cashButton)
 	{
 		string key = cashButton.cashName;
