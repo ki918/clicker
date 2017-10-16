@@ -25,7 +25,7 @@ public class SkillButton : MonoBehaviour {
 		DataController.getInstance ().loadSkillButton (this);
 		// addGoldLoop 함수 시작
 		StartCoroutine ("addGoldLoop");
-		updateUI ();
+		updateUI ();	
 	}
 
 	/**

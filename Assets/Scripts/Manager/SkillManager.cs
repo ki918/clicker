@@ -9,6 +9,7 @@ public class SkillManager : MonoBehaviour {
 	public float coolTime;
 	public float Gold;
 	public float Time;
+	public float Drop;
 	IEnumerator logCoroutine = null;
 
 	public static SkillManager getInstance() {
@@ -34,7 +35,15 @@ public class SkillManager : MonoBehaviour {
 		StartCoroutine(StopDisplayLog());
 		StartCoroutine (timer());
 	}
+	//드랍확률증가
+	public void ItemChanceUp()
+	{
+		logCoroutine = ItemChance ();
 
+		StartCoroutine (logCoroutine);
+	}
+
+	//터치 골드량 두배
 	public void TouchGoldDouble()
 	{
 		logCoroutine = TouchGold ();
@@ -42,10 +51,18 @@ public class SkillManager : MonoBehaviour {
 		StartCoroutine (logCoroutine);
 	}
 
+	//초당 골드량 두배
+	public void AutoGoldDouble()
+	{
+		logCoroutine = AutoGold ();
+		StartCoroutine (logCoroutine);
+	}
+
 	void Start () {
 		
 	}
 
+	//자동터치
 	private IEnumerator DisplayLog()
 	{
 		WaitForSeconds waitSec = new WaitForSeconds (0.033f);
@@ -56,6 +73,7 @@ public class SkillManager : MonoBehaviour {
 		}
 	}	
 
+	//터치 골드량 증가
 	private IEnumerator TouchGold()
 	{
 		DataController.getInstance().x = 2;
@@ -63,6 +81,15 @@ public class SkillManager : MonoBehaviour {
 		DataController.getInstance().x = 1;
 	}	
 
+	//초당 골드량 증가
+	private IEnumerator AutoGold()
+	{
+		DataController.getInstance().y = 2;
+		yield return new WaitForSeconds (3.0f);
+		DataController.getInstance().y = 1;
+	}	
+
+	//코루틴 중단
 	private IEnumerator StopDisplayLog()
 	{
 		yield return new WaitForSeconds (3.0f);
@@ -70,6 +97,17 @@ public class SkillManager : MonoBehaviour {
 		StopCoroutine (logCoroutine);
 	}
 
+	//드랍확률 증가
+	private IEnumerator ItemChance()
+	{
+		Drop = DataController.getInstance ().mItemDropChance;
+		DataController.getInstance ().z = 1.1f;
+		DataController.getInstance ().mItemDropChance = DataController.getInstance ().mItemDropChance * DataController.getInstance ().z;
+		yield return new WaitForSeconds (3.0f);
+		DataController.getInstance ().mItemDropChance = Drop;
+	}	
+
+	//쿨타임
 	private IEnumerator timer() {
 		int time = (int)3.0f;
 		while((time--) >= 0) {

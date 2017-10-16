@@ -11,6 +11,8 @@ public class DataController : MonoBehaviour
 	private GameObject viewItem;
 	private int mCurrentStage;
 	public int x = 1;
+	public int y = 1;
+	public float z = 1.0f;
 
 	public GameObject firstItem;
 	public GameObject itemZone;
@@ -272,7 +274,7 @@ public class DataController : MonoBehaviour
 
 		for (int i = 0; i < itemButtons.Length; i++) {
 			if (itemButtons [i].isPurchase) {
-				result += itemButtons [i].goldPerSec;
+				result += itemButtons[i].goldPerSec*y;
 			}
 		}
 
